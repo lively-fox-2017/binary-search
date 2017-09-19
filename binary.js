@@ -27,7 +27,7 @@ function binary_search (search, array) {
   let startIndex = 0;
   let highIndex = array.length-1;
   let midIndex = Math.floor((startIndex+highIndex)/2);
-while(array.indexOf(search) !== -1){
+while(startIndex <= highIndex){
   if(search === array[midIndex]){
     return midIndex;
   }else{
