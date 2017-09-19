@@ -19,16 +19,25 @@ function binary_search (search, array) {
   // Your searching code
   var min = 0;
   var max = array.length-1;
-  while (min <= max) {
-    var	mid = Math.floor((max+min)/2);
-  	if (array[mid] === search)
+  var mid = Math.floor((max+min)/2);
+
+  	if (array[mid] === search){
   		return mid;
-  	else if (array[mid] < search)
-  		min = mid + 1;
-  	else
-  		max = mid - 1;
-  }
-  return -1;
+    
+    } else if (array[mid] < search) {
+      // min = mid-1;
+      console.log(array.slice(mid, max))
+      return binary_search(search, array.slice(mid, max))
+
+    } else if (array[mid] > search) {
+      // max = mid+1;
+      console.log(array.slice(min, mid))
+      return binary_search(search, array.slice(min, mid))
+    
+    } else if (array[mid] !== search){
+
+      return -1;
+    }
 
 }
 
@@ -36,16 +45,16 @@ var arrayGenapSorted = ownSort(testArrayGenap)
 var arrayGanjilSorted = ownSort(testArrayGanjil)
 
 console.log(arrayGenapSorted)
-// console.log(arrayGanjilSorted)
+console.log(arrayGanjilSorted)
 
 // Driver code
 console.log(binary_search(8, arrayGenapSorted))
-console.log(binary_search(18, arrayGenapSorted))
-// console.log(binary_search(33, arrayGenapSorted))
+console.log(binary_search(10, arrayGenapSorted))
+console.log(binary_search(33, arrayGenapSorted))
 
-// console.log(binary_search(53, arrayGanjilSorted))
-// console.log(binary_search(3, arrayGanjilSorted))
-// console.log(binary_search(2, arrayGanjilSorted))
+console.log(binary_search(53, arrayGanjilSorted))
+console.log(binary_search(3, arrayGanjilSorted))
+console.log(binary_search(2, arrayGanjilSorted))
 
 // module.exports = {
 //   binarysearch
