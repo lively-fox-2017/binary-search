@@ -27,14 +27,28 @@ function ownSort(arr) {
 // => kondisikan jika parameter search(atau angka yang ingin kita cari) !== -1
 // => kembalikan nilai index perulangan tersebut
 
-function binarySearch(search, array) {
+function binarySearch(search, array, inA, inB) {
   // Your searching code
-  for(var i = 0; i < array.length; i++){
-    if(array[i] === search){
-      return i
-    }
+  // ========== METODE FORLOOP ==========
+  // for(var i = 0; i < array.length; i++){
+  //   if(array[i] === search){
+  //     return i
+  //   }
+  // }
+  // return -1;
+
+  // ========== METODE RECURSIVE ==========
+  let mid = Math.floor((inA + inB) / 2)
+  if(inA >= inB && search !== array[mid]){
+    return -1
+  }else if(array[mid] === search){
+    return mid
+  }else if(search < array[mid]){
+    return binarySearch(search, array, inA, mid - 1)
+    // return binarySearch()
+  }else{
+    return binarySearch(search, array, mid + 1, inB)
   }
-  return -1;
 
 }
 
@@ -45,10 +59,10 @@ console.log(ownSort(arrayGenapSorted))
 console.log(ownSort(arrayGanjilSorted))
 
 // Driver code
-console.log(binarySearch(8, arrayGenapSorted))
-console.log(binarySearch(10, arrayGenapSorted))
-console.log(binarySearch(33, arrayGenapSorted))
+console.log(binarySearch(8, arrayGenapSorted, 0, arrayGenapSorted.length - 1))
+console.log(binarySearch(10, arrayGenapSorted, 0, arrayGenapSorted.length - 1))
+console.log(binarySearch(33, arrayGenapSorted, 0, arrayGenapSorted.length - 1))
 
-console.log(binarySearch(53, arrayGanjilSorted))
-console.log(binarySearch(3, arrayGanjilSorted))
-console.log(binarySearch(2, arrayGanjilSorted))
+console.log(binarySearch(53, arrayGanjilSorted, 0, arrayGanjilSorted.length - 1))
+console.log(binarySearch(3, arrayGanjilSorted, 0, arrayGanjilSorted.length - 1))
+console.log(binarySearch(2, arrayGanjilSorted, 0, arrayGanjilSorted.length - 1))
