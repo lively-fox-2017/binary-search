@@ -17,25 +17,33 @@ function ownSort(arr) {
   return arr
 }
 
-function binarySearch (search, array) {
+function binarySearch (search, array, position = 0) {
   // Your searching code
-  var lo = 0;
-  var hi = array.length-1;
-  var middle = 0;
+  var low = 0;
+  var high = array.length-1;
+  var middle = Math.ceil((low+high)/2);
 
-  while(lo<=hi){
-    middle = Math.floor(lo+(hi-lo)/2);
-    if (search < array[middle]){
-      hi = middle -1;
-    } else if (search > array[middle]){
-      lo = middle +1;
-    } else {
-      return middle;
-    }
+  if (search === array[middle]) {
+    // console.log('search === array[middle]', middle);
+    return middle + position
+  } else if (low === high){
+    // console.log('low === high', middle);
+    return -1
+  } else if (search < array[middle]) {
+
+    var newArr = array.slice(0, middle)
+    // console.log(middle, position, newArr);
+    return binarySearch(search, newArr)
+  } else if (search > array[middle]) {
+
+    var newArr
+    newArr = array.slice(middle, array.length)
+    // console.log('masuk search > array[middle]', middle, position, newArr);
+    return binarySearch(search, newArr, position = middle + position)
   }
 
-  return -1;
 }
+
 
 var arrayGenapSorted = ownSort(testArrayGenap)
 var arrayGanjilSorted = ownSort(testArrayGanjil)
@@ -44,10 +52,12 @@ var arrayGanjilSorted = ownSort(testArrayGanjil)
 //arrayGanjilSorted = [3, 21, 31, 53, 53, 55, 77, 85, 89]
 
 // Driver code
-console.log(binarySearch(8, arrayGenapSorted)) // 0
+console.log(binarySearch(40, arrayGenapSorted)) // 0
 console.log(binarySearch(10, arrayGenapSorted)) // 1
 console.log(binarySearch(33, arrayGenapSorted)) // -1
-
+console.log(binarySearch(90, arrayGenapSorted))
+console.log(binarySearch(32, arrayGenapSorted))
+// //
 console.log(binarySearch(53, arrayGanjilSorted)) // 4
 console.log(binarySearch(3, arrayGanjilSorted)) // 0
 console.log(binarySearch(2, arrayGanjilSorted)) // -1
