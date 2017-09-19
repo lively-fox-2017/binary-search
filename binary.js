@@ -5,26 +5,63 @@ var testArrayGanjil = [3, 31, 89, 53, 53, 85, 77, 21, 55]
 
 function ownSort(arr) {
   // Your sorting code
+  for (var i =0; i < arr.length; i++){
+    for(var j = 0; j<i; j++){
+      if(arr[j] > arr[i]){
+        var tampung = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tampung;
+      }
+    }
+  }
   return arr
 }
 
-function binarySearch (search, array) {
+function binarySearch (search, array, position = 0) {
   // Your searching code
-  return 0;
+  var low = 0;
+  var high = array.length-1;
+  var middle = Math.ceil((low+high)/2);
+
+  if (search === array[middle]) {
+    // console.log('search === array[middle]', middle);
+    return middle + position
+  } else if (low === high){
+    // console.log('low === high', middle);
+    return -1
+  } else if (search < array[middle]) {
+
+    var newArr = array.slice(0, middle)
+    // console.log(middle, position, newArr);
+    return binarySearch(search, newArr)
+  } else if (search > array[middle]) {
+
+    var newArr
+    newArr = array.slice(middle, array.length)
+    // console.log('masuk search > array[middle]', middle, position, newArr);
+    return binarySearch(search, newArr, position = middle + position)
+  }
+
 }
+
 
 var arrayGenapSorted = ownSort(testArrayGenap)
 var arrayGanjilSorted = ownSort(testArrayGanjil)
 
-// Driver code
-console.log(binary_search(8, arrayGenapSorted))
-console.log(binary_search(10, arrayGenapSorted))
-console.log(binary_search(33, arrayGenapSorted))
+//arrayGenapSorted = [8, 10, 10, 18, 22, 22, 32, 40, 90]
+//arrayGanjilSorted = [3, 21, 31, 53, 53, 55, 77, 85, 89]
 
-console.log(binary_search(53, arrayGanjilSorted))
-console.log(binary_search(3, arrayGanjilSorted))
-console.log(binary_search(2, arrayGanjilSorted))
+// Driver code
+console.log(binarySearch(40, arrayGenapSorted)) // 0
+console.log(binarySearch(10, arrayGenapSorted)) // 1
+console.log(binarySearch(33, arrayGenapSorted)) // -1
+console.log(binarySearch(90, arrayGenapSorted))
+console.log(binarySearch(32, arrayGenapSorted))
+// //
+console.log(binarySearch(53, arrayGanjilSorted)) // 4
+console.log(binarySearch(3, arrayGanjilSorted)) // 0
+console.log(binarySearch(2, arrayGanjilSorted)) // -1
 
 module.exports = {
-  binary_search
+  binarySearch
 }
