@@ -19,9 +19,28 @@ function ownSort(arr) {
   return arr
 }
 
-function binarySearch (search, array) {
+function binary_search (search, array) {
   // Your searching code
-  return 0;
+  var highIndex = array.length;
+  console.log(highIndex);
+  var startIndex = 0;
+  console.log(array);
+  console.log(array[midIndex]);
+  console.log(search);
+  while(startIndex <= highIndex){
+    var midIndex = Math.floor((startIndex + highIndex)/2);
+    console.log(midIndex);
+    if(array[midIndex] === search){
+      return midIndex;
+    }
+    else if(array[midIndex] < search){
+      startIndex = midIndex+1
+    }
+    else if(array[midIndex] > search){
+      highIndex = midIndex-1
+    }
+  }
+  return -1;
 }
 
 var arrayGenapSorted = ownSort(testArrayGenap)
