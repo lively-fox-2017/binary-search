@@ -4,14 +4,17 @@ var testArrayGenap = [40, 18, 22, 32, 90, 10, 10, 22, 8]
 var testArrayGanjil = [3, 31, 89, 53, 53, 85, 77, 21, 55]
 
 function ownSort(arr) {
-  // Your sorting code
-  var arrBaru = [];
-  while(arr.length > 0) {
-
-    arrBaru.push(Number(arr.splice(arr.indexOf(Math.min(...arr)), 1)))
+  var tampung;
+  for(var i = 1; i < arr.length; i++) {
+    for(var j = 0; j < i; j++) {
+      if(arr[i] < arr[j]) {
+        tampung = arr[i]
+        arr[i] = arr[j]
+        arr[j] = tampung
+      }
+    }
   }
-
-  return arrBaru;
+  return arr
 }
 
 function binary_search(search, array) {
