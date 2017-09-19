@@ -5,16 +5,39 @@ var testArrayGanjil = [3, 31, 89, 53, 53, 85, 77, 21, 55]
 
 function ownSort(arr) {
   // Your sorting code
+
+  for (var i = 1; i < arr.length; i++){
+    for(var j = 0; j < i-1;j++){
+      var temp = arr[i]
+      if(arr[i] < arr[j]){
+        arr[i] = arr[j];
+        arr[j] = temp;
+      }
+    }
+  }
   return arr
 }
 
-function binarySearch (search, array) {
+function binary_search (search, array) {
   // Your searching code
-  return 0;
+  var startIndex = 0;
+  var highIndex = array.length;
+  var midIndex = Math.floor(startIndex + highIndex / 2);
+  while (array[midIndex] == search ){
+  if(array[midIndex] > search){
+    console.log('masuk if')
+    startIndex = midIndex + 1
+   }
+  }
+
+
+
 }
 
 var arrayGenapSorted = ownSort(testArrayGenap)
 var arrayGanjilSorted = ownSort(testArrayGanjil)
+
+// console.log(arrayGenapSorted);
 
 // Driver code
 console.log(binary_search(8, arrayGenapSorted))
