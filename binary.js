@@ -78,31 +78,24 @@ function ownSort(arr) {
 
 // ==========REKURSIF=============
 
-// [ 3, 21, 31, 53, 53, 55, 77, 85, 89 ]
-console.log(ownSort(testArrayGanjil));
-// [ 8, 10, 10, 18, 22, 22, 32, 40, 90 ]
-console.log(ownSort(testArrayGenap));
-//
-
-function binary_rekursif(search, array) {
-  let awal = 0;
-  let akhir = array.length
-
-  while (awal <= akhir) {
-    let mid = Math.floor((awal + akhir) / 2)
-    if (search == array[mid]) {
+function binary_rekursif(search,array,indexAwal,indexAkhir) {
+    //Buat Cari Nilai Tengah
+    let mid = Math.floor((indexAwal + indexAkhir) / 2)
+    console.log('Index Awal = '+indexAwal);
+    console.log('Index Akhir = '+indexAkhir);
+    if(search != array[mid] && indexAwal >= indexAkhir){
+      return -1;
+    } else if (search == array[mid]) {
       return mid;
     } else if (search > array[mid]) {
-      awal = mid + 1
-      binary_rekursif(search,mid)
+      // awal = mid + 1
+      return binary_rekursif(search,array,mid+1,indexAkhir)
     } else if (search < array[mid]) {
-      akhir = mid - 1
-      binary_rekursif(search,mid)
+      // akhir = mid - 1
+      return binary_rekursif(search,array,indexAwal,mid-1)
     }
-  }
-  return -1
 }
-// Driver code
+// ============DRIVER CODE===============
 var arrayGenapSorted = ownSort(testArrayGenap)
 var arrayGanjilSorted = ownSort(testArrayGanjil)
 //
@@ -114,13 +107,18 @@ var arrayGanjilSorted = ownSort(testArrayGanjil)
 // console.log(binary_search(3, arrayGanjilSorted)) // 1
 // console.log(binary_search(2, arrayGanjilSorted)) // -1
 
-console.log(binary_rekursif(53, arrayGanjilSorted)) // 3 atau 4
-console.log(binary_rekursif(3, arrayGanjilSorted)) // 1
-console.log(binary_rekursif(2, arrayGanjilSorted)) // -1
-
-console.log(binary_rekursif(8, arrayGenapSorted)) // 3 atau 4
-console.log(binary_rekursif(10, arrayGenapSorted)) // 1
-console.log(binary_rekursif(33, arrayGenapSorted)) // -1
+// [ 8, 10, 10, 18, 22, 22, 32, 40, 90 ]
+// console.log('==========Ganjil==========');
+// console.log(ownSort(testArrayGanjil));
+// console.log(binary_rekursif(53, arrayGanjilSorted,0,testArrayGanjil.length-1)) // 3 atau 4
+// console.log(binary_rekursif(3, arrayGanjilSorted,0,testArrayGanjil.length-1)) // 0
+// console.log(binary_rekursif(2, arrayGanjilSorted,0,testArrayGanjil.length-1)) // -1
+console.log('==========Genap===========');
+console.log(ownSort(testArrayGenap));
+console.log(binary_rekursif(10, arrayGenapSorted,0,testArrayGenap.length-1)) // 3 atau 4
+// console.log(binary_rekursif(90, arrayGenapSorted,0,testArrayGenap.length-1)) // 1
+// console.log(binary_rekursif(33, arrayGenapSorted,0,testArrayGenap.length-1)) // -1
+// console.log('==========================');
 
 module.exports = {
   // binary_search,
