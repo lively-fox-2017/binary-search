@@ -94,10 +94,10 @@ function binary_rekursif(search, array) {
       return mid;
     } else if (search > array[mid]) {
       awal = mid + 1
-      binary_rekursif(search,Math.floor((awal + akhir) / 2))
+      binary_rekursif(search,mid)
     } else if (search < array[mid]) {
       akhir = mid - 1
-      binary_rekursif(search,Math.floor((awal + akhir) / 2))
+      binary_rekursif(search,mid)
     }
   }
   return -1
