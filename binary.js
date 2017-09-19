@@ -33,20 +33,20 @@ function binarySearch(search, array) {
   let indexAkhir = array.length - 1;
   let indexTengah = Math.floor((indexAwal + indexAkhir)/2);
   
-  if(array.indexOf(search) === -1){
-	return -1;
-  }else{
-	while(array[indexTengah] !== search){
+  while(indexAwal <= indexAkhir){
+	if(array[indexTengah] === search){
+		return indexTengah;
+	}else{
 		if(array[indexTengah] > search){
 			indexAkhir = indexTengah - 1;
 		}else{
 			indexAwal = indexTengah + 1;
 		}
-	indexTengah = Math.floor((indexAwal + indexAkhir)/2);
+		indexTengah = Math.floor((indexAwal + indexAkhir)/2);
 	}
-	
-	return indexTengah;
   }
+  
+  return -1;
 }
 
 var arrayGenapSorted = ownSort(testArrayGenap)
